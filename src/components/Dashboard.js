@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import firebase from 'firebase';
 
+import { getDataStore } from '../models/DataStore';
 import './Dashboard.css';
 
 import {
@@ -12,6 +14,8 @@ import {
 } from "react-router-dom";
 
 export function Dashboard({user, setUser}) {
+
+  const dataStore = getDataStore();
 
   let history = useHistory();
 
@@ -33,6 +37,7 @@ export function Dashboard({user, setUser}) {
               <Link to="/dashboard/about">About</Link>
             </p>
             <p onClick={()=>{
+              firebase.auth().signOut();
               setUser(undefined);
               history.push('/');
             }}>
@@ -66,7 +71,6 @@ function Main() {
 function About() {
   const [count, setCount] = useState(0);
 
-  let foo = new Date();
   return (
     <div className='body-main'>
       <h2>About</h2>
