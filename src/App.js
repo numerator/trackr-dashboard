@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, createContext, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  useLocation
+} from "react-router-dom";
 
-function App() {
+import { Login } from './components/Login';
+import { Dashboard } from './components/Dashboard';
+
+// adapted from starter code at https://reactrouter.com/web/example/auth-workflow
+
+export default function App() {
+
+  let [user, setUser] = useState();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <div>
+          <Switch>
+            <Route path="/login">
+              <Login setUser={setUser}/>
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard setUser={setUser} user={user}/>
+            </Route>
+            <Route path="/">
+              <Redirect to="/login"/>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    
   );
 }
 
-export default App;

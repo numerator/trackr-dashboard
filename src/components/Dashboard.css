@@ -1,0 +1,20 @@
+
+.dashboard-page-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  height: 600px;
+}
+
+.nav-left {
+  display: flex;
+  flex: 0.2;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 50px;
+  margin-left: 20px;
+}
+
+.body-main {
+  flex: 0.8
+}
